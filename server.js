@@ -12,7 +12,7 @@ app.use(
 
 //require('./routes/component.routes')(app);
 
-app.listen(port, () => console.log(`Listening on port: ${port}`) );
+const server = app.listen(port, () => console.log(`Listening on port: ${port}`) );
 
 
 
@@ -20,7 +20,7 @@ app.listen(port, () => console.log(`Listening on port: ${port}`) );
 const io = require('socket.io')(server);
 
 io.on("connection", socket => {
-    socket.on('message_from_client', data => {
-        socket.broadcast.emit('message_from_server', data);
+    socket.on('joined', data => {
+        socket.broadcast.emit('joined', data);
     })
 })
